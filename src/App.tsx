@@ -1,4 +1,3 @@
-import "./App.css";
 import SelectSkip from "./pages/SelectSkip/SelectSkip";
 
 function App() {
