@@ -7,3 +7,14 @@ export const api = axios.create({
     Accept: "application/json",
   },
 });
+// TODO add snackbar for errors
+
+api.interceptors.request.use(
+  (config) => config,
+  (error) => Promise.reject(error)
+);
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => Promise.reject(error)
+);
