@@ -1,7 +1,6 @@
 import { useEffect, useState, type JSX } from "react";
 import type { SkipType } from "../../model/SkipType";
 import { getSkips } from "../../http/skip.http";
-import { Box, Grid, Paper } from "@mui/material";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -11,7 +10,7 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
-import { StepContent, Typography } from "@mui/material";
+import { StepContent, Typography, Box, Grid, Paper } from "@mui/material";
 import SkipCard from "../../components/SkipCard/SkipCard";
 
 const SelectSkip = () => {
@@ -41,8 +40,7 @@ const SelectSkip = () => {
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
-          }}
-        >
+          }}>
           <Typography variant="h4">Choose Your Skip Size</Typography>
           <Typography variant="subtitle1">
             Select the skip size that best suits your needs
@@ -57,8 +55,7 @@ const SelectSkip = () => {
                     xs: 12,
                     md: 6,
                     xl: 4,
-                  }}
-                >
+                  }}>
                   <Paper style={{ padding: 16, textAlign: "center" }}>
                     <SkipCard key={skip.id} skip={skip} />
                   </Paper>
@@ -101,8 +98,7 @@ const SelectSkip = () => {
           xs: "2rem",
           xl: "3rem",
         },
-      }}
-    >
+      }}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
@@ -117,8 +113,7 @@ const SelectSkip = () => {
                 if (index <= activeStep) {
                   setActiveStep(index);
                 }
-              }}
-            >
+              }}>
               {step.label}
             </StepLabel>
             <StepContent>{step.content}</StepContent>
