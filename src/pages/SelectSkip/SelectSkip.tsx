@@ -1,11 +1,87 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import type { SkipType } from "../../model/SkipType";
 import { getSkips } from "../../http/skip.http";
-import { Box } from "@mui/material";
-import MatStepper from "../../components/MatStepper/MatStepper";
+import { Box, Grid, Paper } from "@mui/material";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
+import { StepContent, Typography } from "@mui/material";
+import SkipCard from "../../components/SkipCard/SkipCard";
 
 const SelectSkip = () => {
   const [users, setUsers] = useState<SkipType[]>([]);
+  const [activeStep, setActiveStep] = useState(2);
+
+  const steps: {
+    label: string;
+    icon: JSX.Element;
+    content?: JSX.Element;
+  }[] = [
+    {
+      label: "Postcode",
+      icon: <LocationOnOutlinedIcon />,
+    },
+    {
+      label: "Waste Type",
+      icon: <DeleteOutlinedIcon />,
+    },
+    {
+      label: "Select Skip",
+      icon: <LocalShippingOutlinedIcon />,
+      content: (
+        <Box
+          sx={{
+            padding: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          <Typography variant="h4">Choose Your Skip Size</Typography>
+          <Typography variant="subtitle1">
+            Select the skip size that best suits your needs
+          </Typography>
+
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2}>
+              {users.map((skip) => (
+                <Grid
+                  key={`${skip.id}-grid`}
+                  size={{
+                    xs: 12,
+                    md: 6,
+                    xl: 4,
+                  }}
+                >
+                  <Paper style={{ padding: 16, textAlign: "center" }}>
+                    <SkipCard key={skip.id} skip={skip} />
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Box>
+      ),
+    },
+    {
+      label: "Permit Check",
+      icon: <ShieldOutlinedIcon />,
+    },
+    {
+      label: "Choose Date",
+      icon: <CalendarTodayOutlinedIcon />,
+    },
+    {
+      label: "Payment",
+      icon: <PaymentOutlinedIcon />,
+    },
+  ];
 
   useEffect(() => {
     getSkips()
@@ -16,13 +92,39 @@ const SelectSkip = () => {
   return (
     <Box
       sx={{
-        paddingInline: "4rem",
-        paddingBlock: "2rem",
-      }}>
-      <MatStepper />
-      {users.map((u) => (
-        <p key={u.id}>{u.id} works!</p>
-      ))}
+        paddingInline: {
+          xs: "2rem",
+          sm: "4rem",
+          xl: "8rem",
+        },
+        paddingBlock: {
+          xs: "2rem",
+          xl: "3rem",
+        },
+      }}
+    >
+      <Stepper activeStep={activeStep} orientation="vertical">
+        {steps.map((step, index) => (
+          <Step key={step.label}>
+            <StepLabel
+              icon={step.icon}
+              sx={{
+                ":hover": {
+                  cursor: index <= activeStep ? "pointer" : "default",
+                },
+              }}
+              onClick={() => {
+                if (index <= activeStep) {
+                  setActiveStep(index);
+                }
+              }}
+            >
+              {step.label}
+            </StepLabel>
+            <StepContent>{step.content}</StepContent>
+          </Step>
+        ))}
+      </Stepper>
     </Box>
   );
 };
