@@ -7,7 +7,6 @@ export const api = axios.create({
     Accept: "application/json",
   },
 });
-// TODO add snackbar for errors
 
 api.interceptors.request.use(
   (config) => config,
