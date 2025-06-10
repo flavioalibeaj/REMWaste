@@ -1,54 +1,79 @@
-# React + TypeScript + Vite
+# REMWaste
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**REMWaste** is a modern React-based web application designed to facilitate skip bin selection and booking for waste management services. Built with TypeScript and Vite, the application provides a responsive and maintainable frontend architecture for interacting with waste disposal service APIs.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🔍 **Skip Bin Selection** – Browse and select skip bin types suited for various waste needs.
+- 🧩 **Component-Driven UI** – Built with reusable and modular components such as `SkipCard`.
+- ⚙️ **Typed API Integration** – Robust API handling using Axios and TypeScript interfaces.
+- 🎨 **Theming Support** – Custom theme configurations with consistent styling across components.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: React
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **HTTP Client**: Axios
+- **Linting**: ESLint
+- **Styling**: CSS / Theme Modules
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── assets/             # Static images and SVGs
+├── components/         # Reusable UI components
+├── http/               # API configuration and service modules
+├── model/              # TypeScript interfaces and models
+├── pages/              # Main pages including SelectSkip
+├── theme/              # Theme configuration
+├── App.tsx             # Root component
+└── main.tsx            # Application entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Getting Started
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Prerequisites
+
+- Node.js (v16+ recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/flavioalibeaj/REMWaste
+cd remwaste
+
+# Install dependencies
+npm install
+# or
+yarn install
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+The app will be available at `http://localhost:5173/` by default.
+
+---
+
+## 🧪 Linting and Formatting
+
+```bash
+npm run lint
 ```
