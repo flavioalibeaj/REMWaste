@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import type { SkipType } from "../../model/SkipType";
-import { blue, orange } from "@mui/material/colors";
+import { blue, indigo, lightBlue, orange } from "@mui/material/colors";
 import WarningIcon from "@mui/icons-material/Warning";
 
 const SkipCard = ({ skip, isSelected, onSkipSelected }: SkipCardProps) => {
@@ -33,7 +33,12 @@ const SkipCard = ({ skip, isSelected, onSkipSelected }: SkipCardProps) => {
             position: "absolute",
             right: "2%",
             top: "2%",
-            background: blue[800],
+            background:
+              skip.size <= 10
+                ? lightBlue[300]
+                : skip.size <= 20
+                ? blue[500]
+                : indigo[800],
           }}
         />
         {!skip.allowed_on_road && (
