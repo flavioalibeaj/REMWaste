@@ -7,6 +7,7 @@ import StepLabel from "@mui/material/StepLabel";
 
 import { StepContent, Box } from "@mui/material";
 import { createSteps } from "./createSteps";
+import { blue } from "@mui/material/colors";
 
 const SelectSkip = () => {
   const [users, setUsers] = useState<SkipType[]>([]);
@@ -50,6 +51,7 @@ const SelectSkip = () => {
             <StepLabel
               icon={step.icon}
               sx={{
+                color: index <= activeStep ? blue[800] : "unset",
                 ":hover": {
                   cursor: index <= activeStep ? "pointer" : "default",
                 },

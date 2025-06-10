@@ -18,16 +18,14 @@ const SkipCard = ({ skip, isSelected, onSkipSelected }: SkipCardProps) => {
       <CardMedia
         sx={{
           position: "relative",
-          height: 140,
-          margin: {
-            xs: 0,
-            sm: 3,
-          },
+          width: "100%",
+          height: "auto",
+          aspectRatio: "16/9",
+          margin: 0,
           borderRadius: 1,
           objectFit: "cover",
         }}
         image="/src/assets/image.png"
-        title="green iguana"
       >
         <Chip
           label={skip.size + " Yards"}
@@ -62,7 +60,7 @@ const SkipCard = ({ skip, isSelected, onSkipSelected }: SkipCardProps) => {
           {skip.hire_period_days} day hire period
         </Typography>
         <Typography sx={{ color: "text.secondary" }}>
-          Transport Cost:
+          Transport Cost:{" "}
           {!skip.transport_cost ? "Free" : `£${skip.transport_cost}`}
         </Typography>
         <Typography variant="h5" sx={{ fontWeight: "600" }} color={blue["800"]}>
