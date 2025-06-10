@@ -1,88 +1,28 @@
-import { useEffect, useState, type JSX } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { SkipType } from "../../model/SkipType";
 import { getSkips } from "../../http/skip.http";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
-import { StepContent, Typography, Box, Grid } from "@mui/material";
-import SkipCard from "../../components/SkipCard/SkipCard";
+
+import { StepContent, Box } from "@mui/material";
+import { createSteps } from "./createSteps";
 
 const SelectSkip = () => {
   const [users, setUsers] = useState<SkipType[]>([]);
   const [activeStep, setActiveStep] = useState(2);
+  const [selectedSkip, setSelectedSkip] = useState<SkipType | undefined>(
+    undefined
+  );
 
-  const steps: {
-    label: string;
-    icon: JSX.Element;
-    content?: JSX.Element;
-  }[] = [
-    {
-      label: "Postcode",
-      icon: <LocationOnOutlinedIcon />,
-    },
-    {
-      label: "Waste Type",
-      icon: <DeleteOutlinedIcon />,
-    },
-    {
-      label: "Select Skip",
-      icon: <LocalShippingOutlinedIcon />,
-      content: (
-        <Box
-          sx={{
-            padding: {
-              xs: "1rem 0",
-              sm: "2rem",
-            },
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem",
-          }}
-        >
-          <Typography variant="h4">Choose Your Skip Size</Typography>
-          <Typography variant="subtitle1">
-            Select the skip size that best suits your needs
-          </Typography>
+  const selectSkip = useCallback((skip?: SkipType) => {
+    setSelectedSkip(skip);
+  }, []);
 
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={4}>
-              {users.map((skip) => (
-                <Grid
-                  key={`${skip.id}-grid`}
-                  size={{
-                    xs: 12,
-                    md: 6,
-                    lg: 4,
-                    xl: 3,
-                  }}
-                >
-                  <SkipCard key={skip.id + "skip-card"} skip={skip} />
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-      ),
-    },
-    {
-      label: "Permit Check",
-      icon: <ShieldOutlinedIcon />,
-    },
-    {
-      label: "Choose Date",
-      icon: <CalendarTodayOutlinedIcon />,
-    },
-    {
-      label: "Payment",
-      icon: <PaymentOutlinedIcon />,
-    },
-  ];
+  const steps = useMemo(
+    () => createSteps(users, selectedSkip, selectSkip),
+    [users, selectedSkip]
+  );
 
   useEffect(() => {
     getSkips()

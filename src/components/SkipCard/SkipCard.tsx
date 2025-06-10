@@ -12,7 +12,7 @@ import type { SkipType } from "../../model/SkipType";
 import { blue, orange } from "@mui/material/colors";
 import WarningIcon from "@mui/icons-material/Warning";
 
-const SkipCard = ({ skip }: SkipCardProps) => {
+const SkipCard = ({ skip, isSelected, onSkipSelected }: SkipCardProps) => {
   return (
     <Card>
       <CardMedia
@@ -62,7 +62,7 @@ const SkipCard = ({ skip }: SkipCardProps) => {
           {skip.hire_period_days} day hire period
         </Typography>
         <Typography sx={{ color: "text.secondary" }}>
-          Transport Cost:{" "}
+          Transport Cost:
           {!skip.transport_cost ? "Free" : `£${skip.transport_cost}`}
         </Typography>
         <Typography variant="h5" sx={{ fontWeight: "600" }} color={blue["800"]}>
@@ -76,9 +76,24 @@ const SkipCard = ({ skip }: SkipCardProps) => {
           margin: "0 1rem 1rem",
         }}
       >
-        <Button variant="outlined" endIcon={<ArrowForwardIcon />}>
-          Select This Skip
-        </Button>
+        {isSelected ? (
+          <Button
+            sx={{ width: "12rem" }}
+            variant="contained"
+            onClick={() => onSkipSelected(undefined)}
+          >
+            Selected
+          </Button>
+        ) : (
+          <Button
+            sx={{ width: "12rem" }}
+            variant="outlined"
+            endIcon={<ArrowForwardIcon />}
+            onClick={() => onSkipSelected(skip)}
+          >
+            Select This Skip
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
@@ -88,4 +103,6 @@ export default SkipCard;
 
 type SkipCardProps = {
   skip: SkipType;
+  isSelected: boolean;
+  onSkipSelected: (skip?: SkipType) => void;
 };
