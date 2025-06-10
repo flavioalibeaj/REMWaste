@@ -6,6 +6,7 @@ import {
   CardMedia,
   Chip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import type { SkipType } from "../../model/SkipType";
@@ -13,8 +14,20 @@ import { blue, indigo, lightBlue, orange } from "@mui/material/colors";
 import WarningIcon from "@mui/icons-material/Warning";
 
 const SkipCard = ({ skip, isSelected, onSkipSelected }: SkipCardProps) => {
+  const theme = useTheme();
+
   return (
-    <Card>
+    <Card
+      sx={{
+        border: `2px solid ${
+          isSelected ? theme.palette.primary.light : theme.palette.grey[100]
+        }`,
+        transition: "all 0.3s ease-in-out",
+        ":hover": {
+          border: `1px solid ${isSelected ? "unset" : theme.palette.grey[500]}`,
+        },
+      }}
+    >
       <CardMedia
         sx={{
           position: "relative",
@@ -45,6 +58,7 @@ const SkipCard = ({ skip, isSelected, onSkipSelected }: SkipCardProps) => {
           <Chip
             label="Not Allowed On Road"
             icon={<WarningIcon />}
+            color="primary"
             sx={{
               position: "absolute",
               left: "2%",
