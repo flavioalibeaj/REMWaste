@@ -37,29 +37,32 @@ const SelectSkip = () => {
         <Box
           sx={{
             padding: {
-              xs: "1rem",
+              xs: "1rem 0",
               sm: "2rem",
             },
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
-          }}>
+          }}
+        >
           <Typography variant="h4">Choose Your Skip Size</Typography>
           <Typography variant="subtitle1">
             Select the skip size that best suits your needs
           </Typography>
 
           <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
               {users.map((skip) => (
                 <Grid
                   key={`${skip.id}-grid`}
                   size={{
                     xs: 12,
                     md: 6,
-                    xl: 4,
-                  }}>
-                  <SkipCard key={skip.id} skip={skip} />
+                    lg: 4,
+                    xl: 3,
+                  }}
+                >
+                  <SkipCard key={skip.id + "skip-card"} skip={skip} />
                 </Grid>
               ))}
             </Grid>
@@ -99,7 +102,8 @@ const SelectSkip = () => {
           xs: "2rem",
           xl: "3rem",
         },
-      }}>
+      }}
+    >
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
@@ -114,7 +118,8 @@ const SelectSkip = () => {
                 if (index <= activeStep) {
                   setActiveStep(index);
                 }
-              }}>
+              }}
+            >
               {step.label}
             </StepLabel>
             <StepContent>{step.content}</StepContent>
