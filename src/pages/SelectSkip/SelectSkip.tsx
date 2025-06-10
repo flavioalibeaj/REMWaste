@@ -10,7 +10,7 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
-import { StepContent, Typography, Box, Grid, Paper } from "@mui/material";
+import { StepContent, Typography, Box, Grid } from "@mui/material";
 import SkipCard from "../../components/SkipCard/SkipCard";
 
 const SelectSkip = () => {
@@ -36,7 +36,10 @@ const SelectSkip = () => {
       content: (
         <Box
           sx={{
-            padding: "2rem",
+            padding: {
+              xs: "1rem",
+              sm: "2rem",
+            },
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
@@ -56,9 +59,7 @@ const SelectSkip = () => {
                     md: 6,
                     xl: 4,
                   }}>
-                  <Paper style={{ padding: 16, textAlign: "center" }}>
-                    <SkipCard key={skip.id} skip={skip} />
-                  </Paper>
+                  <SkipCard key={skip.id} skip={skip} />
                 </Grid>
               ))}
             </Grid>
